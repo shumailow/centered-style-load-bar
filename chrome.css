@@ -1,0 +1,67 @@
+@property --bar-colour {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #f76f53;
+}
+
+@property --bar-width {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --bar-left {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+
+
+@media (-moz-bool-pref: "zen.view.use-single-toolbar") {
+  .browserSidebarContainer.deck-selected::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0px !important;
+    left: var(--bar-left) !important;
+    height: 2.5px !important;
+    max-width: 100% !important;
+    background-color: var(--bar-colour) !important;
+    z-index: 1 !important;
+    transition: width 1s ease-in-out, background 0.2s ease, left 2.2s ease !important;
+    width: var(--bar-width) !important;
+  }
+
+
+
+
+
+
+  &:has(.tabbrowser-tab[selected][busy]) .browserSidebarContainer.deck-selected::before {
+    animation: underlineAnimation 3s infinite;
+  }
+
+
+
+  @keyframes underlineAnimation {
+    0% {
+      --bar-width: 0;
+      --bar-left: 0px;
+    }
+
+    50% {
+      --bar-width: 100%;
+      --bar-left: 0px;
+    }
+
+    100% {
+      --bar-width: 0;
+      --bar-left: 100%;
+    }
+  }
+
+
+
+
+
+}
